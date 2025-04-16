@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1 id="title"> Survey Form </h1>
+<p id="description"> Thank you for participating in this survey </p>
+<form id="survey-form" method="post" action="https://www.freecodecamp.org/">
+  <fieldset id = "first" >
+    <label id = "name-label"> Name <input type = "text"  placeholder = "Enter Your Name"required id = "name"/> <label/>
+
+    <label id = "email-label"> Email
+      <input id = "email" type = "email" required placeholder = "Enter Your Email" /> <label/>
+
+    <label id = "number-label"> Age(optional) <input id = "number" placeholder = "Enter Your Age" type = "number" optional min = "0" max = "35"/><label/>
+    </fieldset>
+<fieldset>
+What is your current subscription tier?
+    <select  id = "dropdown">
+      <option value = ""> Select an Option </options>
+      <option value =  "1" > Bronze </options>
+      <option value = "2"> Silver </options>
+      <option value =  "3"> Gold </options>
+      <option value = "4"> Gold Exclusive </options>
+       </select>
+</fieldset>
+ <fieldset>
+<legend> What tier would you recommend? </legend>
+ <label for  = "bronze"> <input type = "radio" checked value = " "  id = "bronze" name = "tier"/> Bronze  </label>
+    <label for = " silver"> <input type = "radio" value = "1" id = "silver" name = "tier"/> Silver  </label>
+    <label for = "gold"> <input type = "radio" value = "2" id = "gold" name = "tier"/> Gold  </label>
+    <label for = "goldexclusive"> <input type = "radio" value = "3" id = "goldexclusive" name = "tier"/> Gold Exclusive  </label>
+  </fieldset>
+  <fieldset> What is your favourite feature of the subscription?
+
+    <select>
+      <option> Select an Option </options>
+      <option> Peaks </options>
+      <option> Legendary Status </options>
+      <option> In-game Inclusivity </options>
+      <option> Free game-pass </options>
+       </select>
+  </fieldset>
+  <fieldset>
+    <legend> What improvements would you like to see? </legend>
+    <label> <input type = "checkbox" value = "0"/> New Map  </label>
+    <label> <input type = "checkbox" value = "1"/> Mythical Guns  </label>
+    <label> <input type = "checkbox" value = "2"/> Less in game Bots  </label>
+    <label> <input type = "checkbox" value = "3"/> More in game bots   </label>
+    <label> <input type = "checkbox" value = "4"/> More Dail Rewards  </label>
+    <label> <input type = "checkbox" value = "5" /> Lagging  </label>
+    <label> <input type = "checkbox" value = "6"/> More Characters  </label>
+    <label> <input type = "checkbox" value = "7"/> More CP for Less  </label>
+
+  </fieldset>
+  <fieldset >
+    Any comments or Suggestions?
+    <textarea placeholder = "Enter your Comments here......"> </textarea>
+
+  </fieldset>
+  <input type = "submit" id = "submit"/>
+
+</form>
+</body>
+</html>
