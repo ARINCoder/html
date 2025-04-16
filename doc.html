@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Technical Documentation</title>
+</head>
+
+<body>
+    <div id="container">
+        <nav id="navbar">
+            <header>Documentation</header>
+            <a class="nav-link" href="#Getting_Started">Getting Started</a>
+            <a class="nav-link" href="#Architecture_Concepts">Architecture Concepts</a>
+            <a class="nav-link" href="#The_Basics">The Basics</a>
+            <a class="nav-link" href="#Digging_Deeper">Digging Deeper</a>
+            <a class="nav-link" href="#Security">Security</a>
+            <a class="nav-link" href="#Database">Database</a>
+            <a class="nav-link" href="#Eloquent_ORM">Eloquent ORM</a>
+            <a class="nav-link" href="#Testing">Testing</a>
+        </nav>
+
+        <main id="main-doc">
+            <section class="main-section" id="Getting_Started">
+                <header>Getting Started</header>
+                <p>When you're ready to deploy your Laravel application to production, there are some important things
+                    you can do
+                    to make sure your application is running as efficiently as possible. In this document, we'll cover
+                    some great
+                    starting points for making sure your Laravel application is deployed properly.</p>
+                <div class="code">
+                    <pre><code>npm install --save-dev laravel-mix</code></pre>
+                </div>
+                <ul>
+                    <li>Install necessary dependencies</li>
+                    <li>Configure the web server</li>
+                    <li>Ensure that the application is correctly deployed</li>
+                </ul>
+                <p>If you are deploying your application to a server that is running Nginx, you may use the following
+                    configuration file as a starting point for configuring your web server. Most likely, this file will
+                    need to be
+                    customized depending on your server's configuration. If you would like assistance in managing your
+                    server,
+                    consider using a first-party Laravel server management and deployment service such as Laravel Forge.
+                </p>
+            </section>
+
+            <section class="main-section" id="Architecture_Concepts">
+                <header>Architecture Concepts</header>
+                <p>The entry point for all requests to a Laravel application is the public/index.php file. All requests
+                    are
+                    directed to this file by your web server (Apache / Nginx) configuration. The index.php file doesn't
+                    contain much
+                    code. Rather, it is a starting point for loading the rest of the framework.</p>
+                <div class="code">
+                    <pre><code>require __DIR__.'/../vendor/autoload.php';</code></pre>
+                </div>
+                <ul>
+                    <li>Entry point for Laravel application: public/index.php</li>
+                    <li>Web server directs requests to index.php</li>
+                    <li>Autoloader is loaded by Composer</li>
+                </ul>
+                <p>The index.php file loads the Composer generated autoloader definition, and then retrieves an instance
+                    of the
+                    Laravel application from bootstrap/app.php. The first action taken by Laravel itself is to create an
+                    instance of
+                    the application / service container.</p>
+            </section>
+
+            <section class="main-section" id="The_Basics">
+                <header>The Basics</header>
+                <p>All Laravel routes are defined in your route files, which are located in the routes directory. These
+                    files are
+                    automatically loaded by Laravel using the configuration specified in your application's
+                    bootstrap/app.php file.
+                    The routes/web.php file defines routes that are for your web interface. These routes are assigned
+                    the web
+                    middleware group, which provides features like session state and CSRF protection.</p>
+                <div class="code">
+                    <pre><code>Route::get('/', function () {
+    return view('welcome');
+});</code></pre>
+                </div>
+                <ul>
+                    <li>Routes are defined in route files</li>
+                    <li>Web routes are in routes/web.php</li>
+                    <li>Middleware group: web (session, CSRF protection)</li>
+                </ul>
+            </section>
+
+            <section class="main-section" id="Digging_Deeper">
+                <header>Digging Deeper</header>
+                <p>Sometimes you may wish to execute an Artisan command outside of the CLI. For example, you may wish to
+                    execute
+                    an Artisan command from a route or controller. You may use the call method on the Artisan facade to
+                    accomplish
+                    this. The call method accepts either the command's signature name or class name as its first
+                    argument, and an
+                    array of command parameters as the second argument. The exit code will be returned:</p>
+                <div class="code">
+                    <pre><code>Artisan::call('cache:clear');</code></pre>
+                </div>
+                <ul>
+                    <li>Artisan commands can be executed outside CLI</li>
+                    <li>The `call` method accepts command signatures</li>
+                    <li>Exit code is returned after command execution</li>
+                </ul>
+            </section>
+
+            <section class="main-section" id="Security">
+                <header>Security</header>
+                <p>Many web applications provide a way for their users to authenticate with the application and "login".
+                    Implementing this feature in web applications can be a complex and potentially risky endeavor. For
+                    this
+                    reason, Laravel strives to give you the tools you need to implement authentication quickly,
+                    securely, and
+                    easily.</p>
+                <div class="code">
+                    <pre><code>Auth::attempt(['email' => $email, 'password' => $password]);</code></pre>
+                </div>
+                <ul>
+                    <li>Session guard for authentication</li>
+                    <li>Providers for user retrieval from storage</li>
+                    <li>Configurable authentication services in `config/auth.php`</li>
+                </ul>
+            </section>
+
+            <section class="main-section" id="Database">
+                <header>Database</header>
+                <p>Laravel's database query builder provides a convenient, fluent interface to creating and running
+                    database
+                    queries. It can be used to perform most database operations in your application and works perfectly
+                    with all of
+                    Laravel's supported database systems.</p>
+                <div class="code">
+                    <pre><code>DB::table('users')->where('id', 1)->get();</code></pre>
+                </div>
+                <ul>
+                    <li>Fluent interface for queries</li>
+                    <li>Uses PDO binding to prevent SQL injection</li>
+                    <li>Works with all supported database systems</li>
+                </ul>
+            </section>
+
+            <section class="main-section" id="Eloquent_ORM">
+                <header>Eloquent ORM</header>
+                <p>After glancing at the example above, you may have noticed that we did not tell Eloquent which
+                    database table
+                    corresponds to our Flight model. By convention, the "snake case", plural name of the class will be
+                    used as the
+                    table name unless another name is explicitly specified. So, in this case, Eloquent will assume the
+                    Flight model
+                    stores records in the flights table, while an AirTrafficController model would store records in an
+                    air_traffic_controllers table.</p>
+                <div class="code">
+                    <pre><code>$user = User::find(1);</code></pre>
+                </div>
+                <ul>
+                    <li>Automatic model to table mapping</li>
+                    <li>Supports custom table names</li>
+                    <li>Easy querying with methods like `find`, `all`, `where`</li>
+                </ul>
+            </section>
+
+            <section class="main-section" id="Testing">
+                <header>Testing</header>
+                <p>Laravel is built with testing in mind. In fact, support for testing with Pest and PHPUnit is included
+                    out of
+                    the box and a phpunit.xml file is already set up for your application. The framework also ships with
+                    convenient
+                    helper methods that allow you to expressively test your applications.</p>
+                <div class="code">
+                    <pre><code>public function testExample()
+{
+    $this->assertTrue(true);
+}</code></pre>
+                </div>
+                <ul>
+                    <li>Support for Pest and PHPUnit</li>
+                    <li>Test directories: Feature and Unit</li>
+                    <li>Feature tests simulate HTTP requests</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
